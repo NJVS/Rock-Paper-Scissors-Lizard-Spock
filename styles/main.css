@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: hsl(214deg, 47%, 23%);
+}
+
+main.root {
+  position: relative;
+  margin: auto;
+  padding: 2rem 0;
+  width: min(704px, 85%);
+  height: 100%;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+header.main-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 5px solid white;
+}
+header.main-header .score-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 160px;
+  background-color: white;
+  border-radius: 5px;
+}
+header.main-header .score-board h3 {
+  text-transform: uppercase;
+}
+header.main-header .score-board h1 {
+  color: hsl(214deg, 47%, 23%);
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.main-container {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid white;
+}
+.main-container .game-board {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(329px, 70%);
+  aspect-ratio: 329/313;
+  background: url(../images/bg-pentagon.svg) no-repeat;
+  background-size: cover;
+  border: 1px solid white;
+}
+.main-container .game-board button.chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  aspect-ratio: 1/1;
+  border: none;
+  border-radius: 50vh;
+  cursor: pointer;
+}
+.main-container .game-board button.chip > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 75%;
+  background-color: white;
+  border-radius: 50vh;
+  box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.3);
+}
+.main-container .game-board button.chip.chip-rock {
+  top: 100%;
+  left: 80%;
+  background: linear-gradient(to top, hsl(349deg, 71%, 52%), hsl(349deg, 70%, 56%));
+  border: none;
+  border-bottom: 6px solid hsl(349deg, 70%, 39%);
+}
+.main-container .game-board button.chip.chip-paper {
+  top: 40%;
+  left: 100%;
+  background: linear-gradient(to top, hsl(230deg, 89%, 62%), hsl(230deg, 89%, 65%));
+  border-bottom: 6px solid hsl(230deg, 54%, 46%);
+}
+.main-container .game-board button.chip.chip-scissors {
+  top: 0%;
+  left: 50%;
+  background: linear-gradient(to top, hsl(39deg, 89%, 49%), hsl(40deg, 84%, 53%));
+  border-bottom: 6px solid hsl(39deg, 89%, 36%);
+}
+.main-container .game-board button.chip.chip-spock {
+  top: 40%;
+  left: 0;
+  background: linear-gradient(to top, hsl(189deg, 59%, 53%), hsl(189deg, 58%, 57%));
+  border-bottom: 6px solid hsl(189deg, 52%, 36%);
+}
+.main-container .game-board button.chip.chip-lizard {
+  top: 100%;
+  left: 20%;
+  background: linear-gradient(to top, hsl(261deg, 73%, 60%), hsl(261deg, 72%, 63%));
+  border-bottom: 6px solid hsl(261deg, 48%, 45%);
+}
+
+/*# sourceMappingURL=main.css.map */
