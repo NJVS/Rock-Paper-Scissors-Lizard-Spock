@@ -43,7 +43,8 @@
       </div>
     </header>
     <div class="main-container">
-      <div class="game-board">
+      <div id="gameBoard" class="game-board">
+        <!-- BUTTON PICK -->
         <button class="chip chip-rock" id="btnRock">
           <div>
             <img src="./images/icon-rock.svg" alt="rock">
@@ -69,12 +70,21 @@
             <img src="./images/icon-spock.svg" alt="spock">
           </div>
         </button>
+
+        <!-- HOUSE PICK -->
+        <button class="chip chip-house chip-spock" id="chipHouse" disabled>
+          <div>
+            <img src="./images/icon-spock.svg" alt="spock">
+          </div>
+        </button>
       </div>
       
+      <!-- RESULT -->
+
       <!-- <img src="./images/bg-pentagon.svg" alt="pentagon" class="bg-pentagon"> -->
     </div>
   </main>
-
+  <script src="./main.js"></script>
 </body>
 
 </html>
