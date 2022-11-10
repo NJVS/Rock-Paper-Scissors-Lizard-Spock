@@ -64,14 +64,26 @@ header.main-header {
         background: url(../images/bg-pentagon.svg) no-repeat;
         background-size: cover;
         // border: 1px solid white;
-        transition: width 0.5s ease 0.5s;
-
+        transition: all 0.5s ease 2.5s;
+        pointer-events: none;
 
         &.game-start {
             top: 50%;
             width: 0px;
             transition: width 0.5s ease, top 0.5s ease 0.75s;
         }
+
+        // // hover on picking
+        // &:not(.game-start):hover {
+        //     > .chip:not(.chip-house) {
+        //         scale: 0.9;
+        //         opacity: 0.5;
+        //     }
+        //     > .chip:hover {
+        //         scale: 1.1;
+        //         opacity: 1;
+        //     }
+        // }
 
         button.chip {
             position: absolute;
@@ -86,14 +98,29 @@ header.main-header {
             aspect-ratio: 1/1;
             border: none;
             border-radius: 50vh;
+            // transition: translate 0.3s ease 1s;
+            pointer-events: auto;
+
+            transition: translate 0.5s ease 0.5s, scale 0.5s ease 1.5s;
+            
             &:not(&:disabled) {
                 cursor: pointer;
+
+                // &:hover {
+                //     // shadow
+                //     box-shadow: 
+                //         0 0 0px 30px rgba(rgb(255, 255, 255), 0.03),
+                //         0 0 0px 60px rgba(rgb(255, 255, 255), 0.03),
+                //         0 0 0px 90px rgba(rgb(255, 255, 255), 0.03);
+                    
+                // }
             }
             
             &.picked {
                 z-index: 10;
                 scale: 2;
                 transition: scale 0.5s ease 0.75s;
+
                 &::before {
                     opacity: 1;
                     visibility: visible;
@@ -106,15 +133,28 @@ header.main-header {
                 transition: all 0s ease 0.75s;
             }
             &.result {
-                transition: translate 0.5s ease;
                 &.picked {
                     translate: -275% -50%;
+                    transition: translate 0.5s ease;
+
                 }
                 &.chip-house {
                     opacity: 1;
                     visibility: visible;
                     translate: 175% -50%;
+                    transition: translate 0.5s ease;
+
+                    &::before {
+                        transition: opacity 0.5s ease;
+                        
+                    }
                 }
+            }
+            &.won {
+                box-shadow: 
+                    0 0 0px 30px rgba(rgb(255, 255, 255), 0.03),
+                    0 0 0px 60px rgba(rgb(255, 255, 255), 0.03),
+                    0 0 0px 90px rgba(rgb(255, 255, 255), 0.03);
             }
             
             > div {
@@ -142,10 +182,15 @@ header.main-header {
                 opacity: 0;
                 visibility: hidden;
                 scale: 2;
+                // transition: scale 0.5s ease 0.5s, translate 0.5s ease 0.5s, opacity 0s ease 1s, visibility 0s ease 1s;
+                transition: all 0.5s ease 0.5s;
+
                 &::before {
                     content: 'THE HOUSE PICK';
                     opacity: 1;
                     visibility: visible;
+                    transition: opacity 0.5s ease 0.75s;
+
                 }
             }
             &.chip-rock {
@@ -179,6 +224,35 @@ header.main-header {
                 background: linear-gradient(to top, hsl(261, 73%, 60%), hsl(261, 72%, 63%));
                 border-bottom: 6px solid hsl(261, 48%, 45%);
             }
+        }
+    }
+
+    .game-result {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        h2 {
+            color: white;
+            font-size: 3rem;
+        }
+        button {
+            display: block;
+            padding: 1rem 0;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        &.show-result {
+            opacity: 1;
+            visibility: visible;
         }
     }
 }

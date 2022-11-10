@@ -60,7 +60,8 @@ header.main-header .score-board h1 {
   aspect-ratio: 329/313;
   background: url(../images/bg-pentagon.svg) no-repeat;
   background-size: cover;
-  transition: width 0.5s ease 0.5s;
+  transition: all 0.5s ease 2.5s;
+  pointer-events: none;
 }
 .main-container .game-board.game-start {
   top: 50%;
@@ -79,6 +80,8 @@ header.main-header .score-board h1 {
   aspect-ratio: 1/1;
   border: none;
   border-radius: 50vh;
+  pointer-events: auto;
+  transition: translate 0.5s ease 0.5s, scale 0.5s ease 1.5s;
 }
 .main-container .game-board button.chip:not(.main-container .game-board button.chip:disabled) {
   cursor: pointer;
@@ -98,16 +101,21 @@ header.main-header .score-board h1 {
   visibility: hidden;
   transition: all 0s ease 0.75s;
 }
-.main-container .game-board button.chip.result {
-  transition: translate 0.5s ease;
-}
 .main-container .game-board button.chip.result.picked {
   translate: -275% -50%;
+  transition: translate 0.5s ease;
 }
 .main-container .game-board button.chip.result.chip-house {
   opacity: 1;
   visibility: visible;
   translate: 175% -50%;
+  transition: translate 0.5s ease;
+}
+.main-container .game-board button.chip.result.chip-house::before {
+  transition: opacity 0.5s ease;
+}
+.main-container .game-board button.chip.won {
+  box-shadow: 0 0 0px 30px rgba(255, 255, 255, 0.03), 0 0 0px 60px rgba(255, 255, 255, 0.03), 0 0 0px 90px rgba(255, 255, 255, 0.03);
 }
 .main-container .game-board button.chip > div {
   position: relative;
@@ -132,11 +140,13 @@ header.main-header .score-board h1 {
   opacity: 0;
   visibility: hidden;
   scale: 2;
+  transition: all 0.5s ease 0.5s;
 }
 .main-container .game-board button.chip.chip-house::before {
   content: "THE HOUSE PICK";
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.5s ease 0.75s;
 }
 .main-container .game-board button.chip.chip-rock {
   top: 100%;
@@ -168,6 +178,32 @@ header.main-header .score-board h1 {
   left: 20%;
   background: linear-gradient(to top, hsl(261deg, 73%, 60%), hsl(261deg, 72%, 63%));
   border-bottom: 6px solid hsl(261deg, 48%, 45%);
+}
+.main-container .game-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.main-container .game-result h2 {
+  color: white;
+  font-size: 3rem;
+}
+.main-container .game-result button {
+  display: block;
+  padding: 1rem 0;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.main-container .game-result.show-result {
+  opacity: 1;
+  visibility: visible;
 }
 
 /*# sourceMappingURL=main.css.map */
