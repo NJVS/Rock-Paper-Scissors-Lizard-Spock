@@ -87,7 +87,6 @@ header.main-header .score-board h1 {
   cursor: pointer;
 }
 .main-container .game-board button.chip.picked {
-  z-index: 10;
   scale: 2;
   transition: scale 0.5s ease 0.75s;
 }
@@ -111,9 +110,6 @@ header.main-header .score-board h1 {
   translate: 175% -50%;
   transition: translate 0.5s ease;
 }
-.main-container .game-board button.chip.result.chip-house::before {
-  transition: opacity 0.5s ease;
-}
 .main-container .game-board button.chip.won {
   box-shadow: 0 0 0px 30px rgba(255, 255, 255, 0.03), 0 0 0px 60px rgba(255, 255, 255, 0.03), 0 0 0px 90px rgba(255, 255, 255, 0.03);
 }
@@ -135,6 +131,7 @@ header.main-header .score-board h1 {
   color: white;
   opacity: 0;
   visibility: hidden;
+  transition: all 0.5s ease 0.5s;
 }
 .main-container .game-board button.chip.chip-house {
   opacity: 0;
