@@ -23,6 +23,32 @@ document.addEventListener('DOMContentLoaded', () => {
             pickedChip.classList.add('result');
             pickedChip.setAttribute('disabled', 'true');
             houseChip.classList.add('result');
+
+            setTimeout(() => {
+                houseChip.classList.add('won');
+                document.querySelector('#gameResult').classList.add('show-result');
+            }, 500);
         }, 2000);
+    });
+
+    // play again
+    document.querySelector('#btnPlayAgain').addEventListener('click', event => {
+        document.querySelector('#gameResult').classList.remove('show-result');
+        document.querySelector('#gameBoard').classList.remove('game-start');
+        document.querySelectorAll('button.chip').forEach(chip => {
+            chip.classList.remove('won');
+            chip.classList.remove('result');
+            chip.classList.remove('picked');
+            chip.removeAttribute('disabled');
+            if (chip.classList.contains('unpicked')) {
+                setTimeout(() => {
+                    chip.classList.remove('unpicked');
+                }, 2500);
+            }         
+        });
+
+        // setTimeout(() => {
+        //     document.querySelectorAll('button.unpicked').forEach(btn => btn.classList.remove('unpicked')); 
+        // }, 2500);
     });
 });
