@@ -1,61 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#gameBoard').addEventListener('click', event => {
-        const pickedChip = event.target.closest('button.chip');
+        const pickedChip = event.target;
         const houseChip = event.currentTarget.querySelector('.chip-house');
 
+        // run only if target is chip
         if (!pickedChip) return;
 
-        gameStart(pickedChip, houseChip);
-        // picked chip
+        // classes
         pickedChip.classList.add('picked');
         pickedChip.style.zIndex = '10';
-        // board close
+        pickedChip.setAttribute('disabled', 'true');
         event.currentTarget.classList.add('game-start');
-        
-        // // house pick
-        // housePick(houseChip);
+        document.querySelector('#gameResult').classList.add('show-result');
 
-        // hide other buttons
-        event.currentTarget.querySelectorAll('.chip').forEach(btn => {
-            if (!btn.classList.contains('picked') && !btn.classList.contains('chip-house')) {
-                btn.classList.add('unpicked');
-            }
-        });
-
-
-        // check result
-        setTimeout(() => {
-            pickedChip.setAttribute('disabled', 'true');
-            pickedChip.classList.add('result');
-            houseChip.classList.add('result');
-
-            setTimeout(() => {
-                houseChip.classList.add('won');
-                document.querySelector('#gameResult').classList.add('show-result');
-            }, 500);
-        }, 2000);
+        gameStart(pickedChip, houseChip);
     });
 
     // play again
-    document.querySelector('#btnPlayAgain').addEventListener('click', event => {
+    document.querySelector('#btnPlayAgain').addEventListener('click', () => {
         document.querySelector('#gameResult').classList.remove('show-result');
         document.querySelector('#gameBoard').classList.remove('game-start');
+
+        setTimeout(() => {
+            document.querySelector('#chipHouse').removeAttribute('value');
+            document.querySelector('#chipHouse').className = 'chip chip-house';
+        }, 1000);
         
         document.querySelectorAll('button.chip').forEach(chip => {
             chip.classList.remove('won');
-            chip.classList.remove('result');
             chip.classList.remove('picked');
             chip.removeAttribute('disabled');
-            if (chip.classList.contains('unpicked')) {
-                setTimeout(() => {
-                    chip.classList.remove('unpicked');
-                    document.querySelector('#chipHouse').className = 'chip chip-house';
-                    document.querySelector('#chipHouse').removeAttribute('value');
-                }, 2500);
-            }
-            setTimeout(() => {
-                chip.removeAttribute('style');
-            }, 3000);
+            setTimeout(() => chip.removeAttribute('style'), 3000);
         });
     });
 });
@@ -90,14 +65,16 @@ function gameStart(picked, house) {
     }
 
     document.querySelector('#result').innerHTML = result;
+    if (result == 'YOU WIN') {
+        picked.classList.add('won');
+        setTimeout(() => score.innerHTML = parseInt(score.innerHTML) + 1, 2500);
+        
+    } else if (result == 'YOU LOSE') {
+        house.classList.add('won');
+        setTimeout(() => score.innerHTML = parseInt(score.innerHTML) - 1, 2500);
+    }
 
-    setTimeout(() => {
-        if (result == 'YOU WIN') {
-            score.innerHTML = parseInt(score.innerHTML) + 1;
-        } else if (result == 'YOU LOSE') {
-            score.innerHTML = parseInt(score.innerHTML) - 1;
-        }
-    }, 2500);
+    
 }
 
 function housePick(house) {
