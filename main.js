@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const pickedChip = event.target;
         const houseChip = event.currentTarget.querySelector('.chip-house');
 
-        // run only if target is chip
-        if (!pickedChip) return;
-
         // classes
         pickedChip.classList.add('picked');
         pickedChip.style.zIndex = '10';
         pickedChip.setAttribute('disabled', 'true');
+        houseChip.setAttribute('disabled', 'true');
         event.currentTarget.classList.add('game-start');
         document.querySelector('#gameResult').classList.add('show-result');
 
