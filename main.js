@@ -1,5 +1,15 @@
 // USING KEYFRAME
 document.addEventListener('DOMContentLoaded', () => {
+
+    //rules
+    document.querySelector('#showRules').addEventListener('click', () => {
+        document.querySelector('.rules').classList.add('show');
+    });
+    document.querySelector('#closeRules').addEventListener('click', () => {
+        document.querySelector('.rules').classList.remove('show');
+    });
+
+    // game
     document.querySelector('#board').addEventListener('click', event => {
         const picked = event.target;
         const board = event.currentTarget;
