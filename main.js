@@ -1,84 +1,78 @@
+// USING KEYFRAME
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#gameBoard').addEventListener('click', event => {
-        const pickedChip = event.target;
-        const houseChip = event.currentTarget.querySelector('.chip-house');
+    document.querySelector('#board').addEventListener('click', event => {
+        const picked = event.target;
+        const board = event.currentTarget;
+        if (!picked.classList.contains('chip')) return;
 
-        // classes
-        pickedChip.classList.add('picked');
-        pickedChip.style.zIndex = '10';
-        pickedChip.setAttribute('disabled', 'true');
-        houseChip.setAttribute('disabled', 'true');
-        event.currentTarget.classList.add('game-start');
-        document.querySelector('#gameResult').classList.add('show-result');
+        // start
+        start(picked, document.querySelector('#btnHouse'));
 
-        gameStart(pickedChip, houseChip);
+        // clasess
+        board.classList.add('game-start');  // board
+        picked.classList.add('picked');     // chip
+
+        // game end
+        setTimeout(() => board.classList.add('game-end'), 3000);
     });
 
-    // play again
     document.querySelector('#btnPlayAgain').addEventListener('click', () => {
-        document.querySelector('#gameResult').classList.remove('show-result');
-        document.querySelector('#gameBoard').classList.remove('game-start');
+        document.querySelector('#board').classList.add('game-restart');
+        document.querySelector('#board').classList.remove('game-start', 'game-end');
 
         setTimeout(() => {
-            document.querySelector('#chipHouse').removeAttribute('value');
-            document.querySelector('#chipHouse').className = 'chip chip-house';
-        }, 1000);
-        
-        document.querySelectorAll('button.chip').forEach(chip => {
-            chip.classList.remove('won');
-            chip.classList.remove('picked');
-            chip.removeAttribute('disabled');
-            setTimeout(() => chip.removeAttribute('style'), 3000);
-        });
+            document.querySelector('#board').classList.remove('game-restart');
+            document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('picked', 'won'));
+            document.querySelector('#btnHouse').className = 'chip chip-house';
+        }, 2000);
     });
 });
 
 
-function gameStart(picked, house) {
-    const hVal = housePick(house);
-    const pVal = picked.getAttribute('value');
+function start(cp, ch) {
+    const h_val = housePick(ch);
+    const p_val = cp.value;
     const score = document.querySelector('#score');
-    let result = '';
+    let result;
 
-    if (pVal == hVal) {
+    if (p_val == h_val) {
         result = 'DRAW';
     } else {
-        switch (pVal) {
+        switch (p_val) {
             case 'rock':
-                result = ['scissors', 'lizard'].indexOf(hVal) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['scissors', 'lizard'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
                 break;
             case 'paper':
-                result = ['rock', 'spock'].indexOf(hVal) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['rock', 'spock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
                 break;
             case 'scissors':
-                result = ['paper', 'lizard'].indexOf(hVal) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['paper', 'lizard'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
                 break;
             case 'lizard':
-                result = ['paper', 'spock'].indexOf(hVal) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['paper', 'spock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
                 break;
             case 'spock':
-                result = ['scissors', 'rock'].indexOf(hVal) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['scissors', 'rock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
                 break;
         };
     }
 
     document.querySelector('#result').innerHTML = result;
+
     if (result == 'YOU WIN') {
-        picked.classList.add('won');
+        cp.classList.add('won');
         setTimeout(() => score.innerHTML = parseInt(score.innerHTML) + 1, 2500);
         
     } else if (result == 'YOU LOSE') {
-        house.classList.add('won');
+        ch.classList.add('won');
         setTimeout(() => score.innerHTML = parseInt(score.innerHTML) - 1, 2500);
     }
-
-    
 }
 
 function housePick(house) {
-    const rngPick = ['rock', 'paper', 'scissors', 'lizard', 'spock'][Math.floor(Math.random() * 5)];
-    house.classList.add(`chip-${rngPick}`);
-    house.setAttribute('value', rngPick);
-    house.querySelector('img').setAttribute('src', `./images/icon-${rngPick}.svg`)
-    return rngPick;
+    const rng = ['rock', 'paper', 'scissors', 'lizard', 'spock'][Math.floor(Math.random() * 5)];
+    house.classList.add(`chip-${rng}`);
+    house.setAttribute('value', rng);
+    house.querySelector('img').setAttribute('src', `./images/icon-${rng}.svg`)
+    return rng;
 }
