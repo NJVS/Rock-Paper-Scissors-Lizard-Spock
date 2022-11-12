@@ -43,48 +43,38 @@
       </div>
     </header>
     <div class="main-container">
-      <div id="gameBoard" class="game-board">
-        <!-- BUTTON PICK -->
-        <button class="chip chip-rock" id="btnRock" value="rock">
-          <div>
-            <img src="./images/icon-rock.svg" alt="rock">
-          </div>
+      <!-- board -->
+      <div id="board" class="board">
+        <!-- house -->
+        <button class="chip chip-house chip-rock" id="btnHouse" value="spock" disabled>
+          <div><img src="./images/icon-spock.svg" alt="spock"></div>
         </button>
-        <button class="chip chip-paper" id="btnPaper" value="paper">
-          <div>
-            <img src="./images/icon-paper.svg" alt="paper">
-          </div>
-        </button>
-        <button class="chip chip-scissors" id="btnScissors" value="scissors">
-          <div>
-            <img src="./images/icon-scissors.svg" alt="scissors">
-          </div>
-        </button>
-        <button class="chip chip-lizard" id="btnLizard" value="lizard">
-          <div>
-            <img src="./images/icon-lizard.svg" alt="lizard">
-          </div>
-        </button>
-        <button class="chip chip-spock" id="btnSpock" value="spock">
-          <div>
-            <img src="./images/icon-spock.svg" alt="spock">
-          </div>
-        </button>
-
-        <!-- HOUSE PICK -->
-        <button class="chip chip-house" id="chipHouse" disabled>
-          <div>
-            <img src="./images/icon-spock.svg" alt="spock">
-          </div>
-        </button>
+        <!-- choices -->
+        <div class="choices">
+          <button class="chip chip-rock" id="btnRock" value="rock">
+            <div><img src="./images/icon-rock.svg" alt="rock"></div>
+          </button>
+          <button class="chip chip-paper" id="btnPaper" value="paper">
+            <div><img src="./images/icon-paper.svg" alt="paper"></div>
+          </button>
+          <button class="chip chip-scissors" id="btnScissors" value="scissors">
+            <div><img src="./images/icon-scissors.svg" alt="scissors"></div>
+          </button>
+          <button class="chip chip-lizard" id="btnLizard" value="lizard">
+            <div><img src="./images/icon-lizard.svg" alt="lizard"></div>
+          </button>
+          <button class="chip chip-spock" id="btnSpock" value="spock">
+            <div><img src="./images/icon-spock.svg" alt="spock"></div>
+          </button>
+        </div>
       </div>
-      
-      <!-- RESULT -->
-      <div id="gameResult" class="game-result">
-        <h2 id="result">YOU LOSE</h2>
-        <button id="btnPlayAgain">PLAY AGAIN</button>
+      <!-- result -->
+      <div class="result">
+        <h2 id="result">You Lose</h2>
+        <button id="btnPlayAgain">Play Again</button>
       </div>
-      <!-- <img src="./images/bg-pentagon.svg" alt="pentagon" class="bg-pentagon"> -->
+      <p class="attribution">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+        Coded by <a href="#">lieneil</a>.</p>
     </div>
   </main>
   <script src="./main.js"></script>
