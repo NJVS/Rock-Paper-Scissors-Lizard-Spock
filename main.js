@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => board.classList.add('game-end'), 3000);
     });
 
+    // play again
     document.querySelector('#btnPlayAgain').addEventListener('click', () => {
         document.querySelector('#board').classList.add('game-restart');
         document.querySelector('#board').classList.remove('game-start', 'game-end');
