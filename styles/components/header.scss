@@ -1,0 +1,44 @@
+@use '../utils/mixins.scss' as *;
+
+header.main-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: min(704px, 85%);
+    margin: 3rem auto 0;
+    padding: 1rem 1.5rem;
+    border: 3px solid hsl(217, 16%, 45%);
+    border-radius: 0.75rem;
+
+    > img {
+        width: min(115px, 25%);
+        aspect-ratio: 115/114;
+    }
+
+    .score-board {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: min(160px, 30%);
+        height: inherit;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: inherit;
+
+        h3 {
+            color: hsl(229, 64%, 46%);
+            font-size: clamp(0.785rem, 3vw, 1rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        h1 {
+            color: hsl(229, 25%, 31%);
+            font-size: clamp(1.75rem, 8vw, 3rem);
+            line-height: 1;
+        }
+    }
+
+    @include breakpoint(mobile, sm) {
+        
+    }
+}

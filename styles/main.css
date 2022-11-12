@@ -1,183 +1,183 @@
-* {
-  margin: 0;
-  padding: 0;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
 body {
   width: 100%;
-  height: 100vh;
-  background-color: hsl(214deg, 47%, 23%);
+  height: auto;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  position: relative;
 }
 
-main.root {
-  position: relative;
-  margin: auto;
-  padding: 2rem 0;
-  width: min(704px, 85%);
-  height: 100%;
-  font-family: "Barlow Semi Condensed", sans-serif;
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
 }
 
-header.main-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1rem 1.5rem;
-  border: 1px solid white;
-}
-header.main-header .score-board {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 160px;
-  background-color: white;
-  border-radius: 5px;
-}
-header.main-header .score-board h3 {
-  text-transform: uppercase;
-}
-header.main-header .score-board h1 {
-  color: hsl(214deg, 47%, 23%);
-  font-size: 4rem;
-  line-height: 1;
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
 }
 
-.main-container {
-  position: relative;
-  margin: auto;
-  width: 100%;
-  aspect-ratio: 1/1;
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
 }
-.main-container .game-board {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  translate: -50% -50%;
-  width: min(329px, 70%);
-  aspect-ratio: 329/313;
-  background: url(../images/bg-pentagon.svg) no-repeat;
-  background-size: cover;
-  transition: all 0.5s ease 2.5s;
-  pointer-events: none;
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
-.main-container .game-board button.chip {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
+
+/* Remove all animations and transitions for people that prefer not to see them */
+button.chip {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: min(150px, 25vw);
   aspect-ratio: 1/1;
   border: none;
   border-radius: 50vh;
   pointer-events: auto;
-  transition: translate 0.5s ease 0.5s, scale 0.5s ease 1.5s, opacity 0s ease 1.5s;
 }
-.main-container .game-board button.chip:not(.main-container .game-board button.chip:disabled) {
+button.chip:not(button.chip:disabled) {
   cursor: pointer;
 }
-.main-container .game-board button.chip.won {
-  box-shadow: 0 0 0px 30px rgba(255, 255, 255, 0.03), 0 0 0px 60px rgba(255, 255, 255, 0.03), 0 0 0px 90px rgba(255, 255, 255, 0.03);
-}
-.main-container .game-board button.chip > div {
+button.chip > div {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 75%;
-  height: 75%;
+  aspect-ratio: 1/1;
   background-color: white;
   border-radius: 50vh;
   box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.3);
   pointer-events: none;
 }
-.main-container .game-board button.chip > div img {
+button.chip > div img {
+  height: 50%;
   pointer-events: none;
 }
-.main-container .game-board button.chip::before {
+button.chip::before {
   content: "YOU PICKED";
   position: absolute;
   top: -20%;
   color: white;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.5s ease 0.5s;
+  width: max-content;
+  font-size: clamp(0.785rem, 3vw, 1rem);
 }
-.main-container .game-board button.chip.chip-house {
-  opacity: 0;
-  visibility: hidden;
-  scale: 2;
-  transition: all 0.5s ease 0.5s;
+@media (max-width: 426px) {
+  button.chip::before {
+    top: -40%;
+  }
 }
-.main-container .game-board button.chip.chip-house::before {
-  content: "THE HOUSE PICK";
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease 0.75s;
-}
-.main-container .game-board button.chip.chip-rock {
-  top: 100%;
-  left: 80%;
+button.chip.chip-rock {
   background: linear-gradient(to top, hsl(349deg, 71%, 52%), hsl(349deg, 70%, 56%));
-  border: none;
   border-bottom: 6px solid hsl(349deg, 70%, 39%);
 }
-.main-container .game-board button.chip.chip-paper {
-  top: 40%;
-  left: 100%;
+button.chip.chip-paper {
   background: linear-gradient(to top, hsl(230deg, 89%, 62%), hsl(230deg, 89%, 65%));
   border-bottom: 6px solid hsl(230deg, 54%, 46%);
 }
-.main-container .game-board button.chip.chip-scissors {
-  top: 0%;
-  left: 50%;
+button.chip.chip-scissors {
   background: linear-gradient(to top, hsl(39deg, 89%, 49%), hsl(40deg, 84%, 53%));
   border-bottom: 6px solid hsl(39deg, 89%, 36%);
 }
-.main-container .game-board button.chip.chip-spock {
-  top: 40%;
-  left: 0;
+button.chip.chip-spock {
   background: linear-gradient(to top, hsl(189deg, 59%, 53%), hsl(189deg, 58%, 57%));
   border-bottom: 6px solid hsl(189deg, 52%, 36%);
 }
-.main-container .game-board button.chip.chip-lizard {
-  top: 100%;
-  left: 20%;
+button.chip.chip-lizard {
   background: linear-gradient(to top, hsl(261deg, 73%, 60%), hsl(261deg, 72%, 63%));
   border-bottom: 6px solid hsl(261deg, 48%, 45%);
 }
-.main-container .game-board.game-start {
-  top: 50%;
-  width: 0px;
-  transition: width 0.5s ease, top 0.5s ease 0.5s;
-}
-.main-container .game-board.game-start button.chip:not(.picked, .chip-house) {
+button.chip.chip-house {
   opacity: 0;
   visibility: hidden;
-  transition: all 0s ease 0.5s;
 }
-.main-container .game-board.game-start button.picked {
-  scale: 2;
-  translate: -275% -50%;
-  transition: scale 0.5s ease 0.5s, translate 0.5s ease 2s, box-shadow 0.5s ease 2.5s;
+button.chip.chip-house::before {
+  content: "HOUSE PICKED";
 }
-.main-container .game-board.game-start button.picked::before {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease 0.75s;
+
+header.main-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: min(704px, 85%);
+  margin: 3rem auto 0;
+  padding: 1rem 1.5rem;
+  border: 3px solid hsl(217deg, 16%, 45%);
+  border-radius: 0.75rem;
 }
-.main-container .game-board.game-start button.chip-house {
-  opacity: 1;
-  visibility: visible;
-  translate: 175% -50%;
-  transition: all 0.5s ease 2s, box-shadow 0.5s ease 2.5s;
+header.main-header > img {
+  width: min(115px, 25%);
+  aspect-ratio: 115/114;
 }
-.main-container .game-result {
+header.main-header .score-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: min(160px, 30%);
+  height: inherit;
+  background-color: hsl(0deg, 0%, 100%);
+  border-radius: inherit;
+}
+header.main-header .score-board h3 {
+  color: hsl(229deg, 64%, 46%);
+  font-size: clamp(0.785rem, 3vw, 1rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+header.main-header .score-board h1 {
+  color: hsl(229deg, 25%, 31%);
+  font-size: clamp(1.75rem, 8vw, 3rem);
+  line-height: 1;
+}
+.main-container {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+}
+.main-container .result {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -185,26 +185,294 @@ header.main-header .score-board h1 {
   width: 200px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
 }
-.main-container .game-result h2 {
+@media (max-width: 426px) {
+  .main-container .result {
+    top: 60%;
+  }
+}
+.main-container .result h2 {
   color: white;
   font-size: 3rem;
   text-align: center;
 }
-.main-container .game-result button {
+.main-container .result button {
   display: block;
   padding: 1rem 0;
   width: 100%;
-  font-size: 1rem;
-  border-radius: 5px;
   border: none;
+  border-radius: 10px;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   cursor: pointer;
 }
-.main-container .game-result.show-result {
+.main-container .board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(329px, 50vw);
+  aspect-ratio: 329/313;
+  pointer-events: none;
+}
+@media (max-width: 912px) {
+  .main-container .board {
+    top: 35%;
+  }
+}
+.main-container .board .choices {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  height: 100%;
+  background: url(../images/bg-pentagon.svg) no-repeat;
+  background-size: cover;
+  pointer-events: none;
+}
+.main-container .board button.chip {
+  position: absolute;
+  translate: -50% -50%;
+}
+.main-container .board button.chip.chip-house {
+  top: 50%;
+  left: 50%;
+}
+.main-container .board button.chip.chip-rock {
+  top: 100%;
+  left: 80%;
+}
+.main-container .board button.chip.chip-paper {
+  top: 40%;
+  left: 100%;
+}
+.main-container .board button.chip.chip-scissors {
+  top: 0%;
+  left: 50%;
+}
+.main-container .board button.chip.chip-spock {
+  top: 40%;
+  left: 0;
+}
+.main-container .board button.chip.chip-lizard {
+  top: 100%;
+  left: 20%;
+}
+.main-container .board button.chip.chip-house {
+  top: 50%;
+  left: 50%;
+  scale: 2;
+}
+@media (max-width: 912px) {
+  .main-container .board button.chip.chip-house {
+    scale: 1.75;
+  }
+}
+@media (max-width: 426px) {
+  .main-container .board button.chip.chip-house {
+    scale: 1.5;
+  }
+}
+.main-container .board.game-start .choices {
+  width: 0%;
+  height: 0%;
+  transition: all 0.5s ease;
+}
+.main-container .board.game-start button.chip {
+  pointer-events: none;
+}
+.main-container .board.game-start button.chip:not(.picked, .chip-house) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0s ease 0.5s, visibility 0s ease 0.5s;
+}
+.main-container .board.game-start button.chip.picked {
+  z-index: 10;
+  scale: 2;
+  translate: -275% -50%;
+  transition: scale 0.5s ease 0.5s, translate 0.5s ease 2s, box-shadow 0.5s ease 2.5s;
+}
+.main-container .board.game-start button.chip.picked::before {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease 1s, visibility 0.5s ease 1s;
+}
+@media (max-width: 912px) {
+  .main-container .board.game-start button.chip.picked {
+    scale: 1.75;
+    translate: -200% -50%;
+  }
+}
+@media (max-width: 426px) {
+  .main-container .board.game-start button.chip.picked {
+    scale: 1.5;
+    translate: -150% -50%;
+  }
+}
+.main-container .board.game-start button.chip.chip-house {
+  opacity: 1;
+  visibility: visible;
+  translate: 175% -50%;
+  transition: opacity 0s ease 1s, translate 0.5s ease 2s, box-shadow 0.5s ease 2.5s;
+}
+.main-container .board.game-start button.chip.chip-house::before {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease 2s, visibility 0.5s ease 2s;
+}
+@media (max-width: 912px) {
+  .main-container .board.game-start button.chip.chip-house {
+    translate: 100% -50%;
+  }
+}
+@media (max-width: 426px) {
+  .main-container .board.game-start button.chip.chip-house {
+    translate: 50% -50%;
+  }
+}
+.main-container .board.game-start button.chip.won {
+  box-shadow: 0 0 0px 30px rgba(255, 255, 255, 0.03), 0 0 0px 60px rgba(255, 255, 255, 0.03), 0 0 0px 90px rgba(255, 255, 255, 0.03);
+}
+.main-container .board.game-start ~ .result {
   opacity: 1;
   visibility: visible;
   transition: all 0.5s ease 2.5s;
+}
+.main-container .board.game-end *, .main-container .board.game-end ~ .result {
+  transition: unset !important;
+}
+.main-container .board.game-restart .choices {
+  transition: all 0.5s ease 1.5s;
+}
+.main-container .board.game-restart button.chip {
+  pointer-events: none;
+}
+.main-container .board.game-restart button.chip:not(.house-chip) {
+  transition-delay: 1.5s;
+}
+.main-container .board.game-restart button.chip.picked {
+  z-index: 10;
+  transition: translate 0.5s ease 0.5s, scale 0.5s ease 1s, box-shadow 0.5s ease;
+}
+.main-container .board.game-restart button.chip.chip-house {
+  transition: translate 0.5s ease 0.5s, opacity 0s ease 1s, visibility 0s ease 1s, box-shadow 0.5s ease;
+}
+.main-container .board.game-restart button.chip::before {
+  transition: all 0.5s ease;
+}
+.main-container .board.game-restart ~ .result {
+  transition: all 0.5s ease;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+main.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 100%;
+  background-color: hsl(214deg, 47%, 23%);
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+main.root button.show-rules {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  border: 2px solid hsl(217deg, 16%, 45%);
+  border-radius: 10px;
+  color: hsl(220deg, 2%, 63%);
+  font-size: clamp(0.785rem, 3vw, 1rem);
+  letter-spacing: 2px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  main.root button.show-rules:hover {
+    border-color: hsl(0deg, 0%, 100%);
+    color: hsl(0deg, 0%, 100%);
+  }
+}
+@media (max-width: 426px) {
+  main.root button.show-rules {
+    right: 50%;
+    translate: 50%;
+  }
+}
+main.root .rules {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease 0.5s;
+  z-index: -1;
+}
+main.root .rules.show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+main.root .rules.show .container {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease 0.5s;
+}
+main.root .rules .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(400px, 85%);
+  padding: 1rem 2rem 2rem;
+  background-color: hsl(0deg, 0%, 100%);
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+main.root .rules .container > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main.root .rules .container button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+main.root .rules .container h2 {
+  color: hsl(229deg, 25%, 31%);
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+main.root p.attribution {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: max-content;
+  color: hsl(220deg, 2%, 63%);
+  font-size: clamp(0.5rem, 3vw, 0.825rem);
+}
+main.root p.attribution a {
+  color: hsl(0deg, 0%, 100%);
+}
+@media (max-width: 426px) {
+  main.root p.attribution {
+    left: 50%;
+    translate: -50%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

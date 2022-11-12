@@ -1,0 +1,254 @@
+@use '../utils/mixins.scss' as *;
+
+.main-container {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+
+    // result and playagain container
+    .result {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        width: 200px;
+
+        opacity: 0;
+        visibility: hidden;
+
+		@include breakpoint(mobile, sm) {
+			top: 60%;
+		}
+
+        h2 {
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+        }
+    
+        button {
+            display: block;
+            padding: 1rem 0;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    }
+
+    // game board container
+    .board {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        width: min(329px, 50vw);
+        aspect-ratio: 329/313;
+        pointer-events: none;
+
+		@include breakpoint(mobile, lg) {
+			top: 35%;		
+		}
+
+        // button container
+        .choices {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            width: 100%;
+            height: 100%;
+            background: url(../images/bg-pentagon.svg) no-repeat;
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        // button position
+        button.chip {
+            position: absolute;
+            translate: -50% -50%;
+
+            &.chip-house {
+                top: 50%;
+                left: 50%;
+            }
+
+            &.chip-rock {
+                top: 100%;
+                left: 80%;
+            }
+
+            &.chip-paper {
+                top: 40%;
+                left: 100%;
+            }
+
+            &.chip-scissors {
+                top: 0%;
+                left: 50%;
+            }
+
+            &.chip-spock {
+                top: 40%;
+                left: 0;
+            }
+
+            &.chip-lizard {
+                top: 100%;
+                left: 20%;
+            }
+
+            &.chip-house {
+                top: 50%;
+                left: 50%;
+                scale: 2;
+				@include breakpoint(mobile, lg) {
+					scale: 1.75;
+				}
+				@include breakpoint(mobile, sm) {
+					scale: 1.5;
+				}
+            }
+        }
+
+
+        // after pick/choose
+        &.game-start {
+            .choices {
+                width: 0%;
+                height: 0%;
+                transition: all 0.5s ease;
+            }
+
+            button.chip {
+                pointer-events: none;
+
+                &:not(.picked, .chip-house) {
+                    opacity: 0;
+                    visibility: hidden;
+                    transition:
+                        opacity 0s ease 0.5s,
+                        visibility 0s ease 0.5s;
+                }
+
+                &.picked {
+                    z-index: 10;
+                    scale: 2;
+                    translate: -275% -50%;
+                    transition:
+                        scale 0.5s ease 0.5s,
+                        translate 0.5s ease 2s,
+						box-shadow 0.5s ease 2.5s;
+
+                    &::before {
+                        opacity: 1;
+                        visibility: visible;
+                        transition:
+                            opacity 0.5s ease 1s,
+                            visibility 0.5s ease 1s;
+                    }
+
+					@include breakpoint(mobile, lg) {
+						scale: 1.75;
+						translate: -200% -50%;
+					}
+					@include breakpoint(mobile, sm) {
+						scale: 1.5;
+						translate: -150% -50%;
+					}
+                }
+
+                &.chip-house {
+                    opacity: 1;
+                    visibility: visible;
+                    translate: 175% -50%;
+                    transition:
+                        opacity 0s ease 1s,
+                        translate 0.5s ease 2s,
+						box-shadow 0.5s ease 2.5s;
+
+                    &::before {
+                        opacity: 1;
+                        visibility: visible;
+                        transition:
+                            opacity 0.5s ease 2s,
+                            visibility 0.5s ease 2s,;
+                    }
+
+					@include breakpoint(mobile, lg) {
+						translate: 100% -50%;
+					}
+					@include breakpoint(mobile, sm) {
+						translate: 50% -50%;
+					}
+                }
+				
+				&.won {
+					box-shadow: 
+						0 0 0px 30px rgba(rgb(255, 255, 255), 0.03),
+						0 0 0px 60px rgba(rgb(255, 255, 255), 0.03),
+						0 0 0px 90px rgba(rgb(255, 255, 255), 0.03);
+				}
+            }
+
+            // show result
+            ~ .result {
+                opacity: 1;
+                visibility: visible;
+        
+                transition: all 0.5s ease 2.5s;
+            }
+        }
+
+		// remove all transitions
+		&.game-end {
+			*, ~ .result {
+				transition: unset !important;
+			}
+		}
+
+        // restart transitions
+        &.game-restart {
+            .choices {
+                transition: all 0.5s ease 1.5s;
+            }
+
+            button.chip {
+                pointer-events: none;
+
+                &:not(.house-chip) {
+                    transition-delay: 1.5s;
+                }
+				
+                &.picked {
+                    z-index: 10;
+                    transition: 
+                        translate 0.5s ease 0.5s,
+                        scale 0.5s ease 1s,
+						box-shadow 0.5s ease;
+                }
+                &.chip-house {
+                    transition: 
+                        translate 0.5s ease 0.5s, 
+                        opacity 0s ease 1s,
+                        visibility 0s ease 1s,
+						box-shadow 0.5s ease;
+                }
+                &::before {
+                    transition: all 0.5s ease;
+                }
+            }
+
+            ~ .result {
+                transition: all 0.5s ease;
+            }
+        }
+    }
+
+	
+}
