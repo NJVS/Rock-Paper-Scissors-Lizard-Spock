@@ -9,18 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.rules').classList.remove('show');
     });
 
+    // local storage score
+    document.querySelector('#score').innerHTML = getScore();
+
     // game
     document.querySelector('#board').addEventListener('click', event => {
         const picked = event.target;
         const board = event.currentTarget;
         if (!picked.classList.contains('chip')) return;
-
-        // start
-        start(picked, document.querySelector('#btnHouse'));
-
+        
         // clasess
         board.classList.add('game-start');  // board
         picked.classList.add('picked');     // chip
+
+        // start
+        start(picked.value);
 
         // game end
         setTimeout(() => board.classList.add('game-end'), 3000);
@@ -40,50 +43,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function start(cp, ch) {
-    const h_val = housePick(ch);
-    const p_val = cp.value;
-    const score = document.querySelector('#score');
-    let result;
+function start(pickedVal) {
+    const houseVal = housePick();
+    const resultTxt = document.querySelector('#result'); 
 
-    if (p_val == h_val) {
-        result = 'DRAW';
+    if (pickedVal == houseVal) {
+        resultTxt.innerHTML = 'DRAW';
     } else {
-        switch (p_val) {
+        let result;
+
+        switch (pickedVal) {
             case 'rock':
-                result = ['scissors', 'lizard'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['scissors', 'lizard'].indexOf(houseVal) == -1 ? false : true;
                 break;
             case 'paper':
-                result = ['rock', 'spock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['rock', 'spock'].indexOf(houseVal) == -1 ? false : true;
                 break;
             case 'scissors':
-                result = ['paper', 'lizard'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['paper', 'lizard'].indexOf(houseVal) == -1 ? false : true;
                 break;
             case 'lizard':
-                result = ['paper', 'spock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['paper', 'spock'].indexOf(houseVal) == -1 ? false : true;
                 break;
             case 'spock':
-                result = ['scissors', 'rock'].indexOf(h_val) == -1 ? 'YOU LOSE' : 'YOU WIN';
+                result = ['scissors', 'rock'].indexOf(houseVal) == -1 ? false : true;
                 break;
         };
-    }
 
-    document.querySelector('#result').innerHTML = result;
-
-    if (result == 'YOU WIN') {
-        cp.classList.add('won');
-        setTimeout(() => score.innerHTML = parseInt(score.innerHTML) + 1, 2500);
-        
-    } else if (result == 'YOU LOSE') {
-        ch.classList.add('won');
-        setTimeout(() => score.innerHTML = parseInt(score.innerHTML) - 1, 2500);
+        resultTxt.innerHTML = result ? 'YOU WIN' : 'YOU LOSE';
+        document.querySelector(`button.${result ? 'picked' : 'chip-house'}`).classList.add('won');
+        setTimeout(() => updateScore(result), 2500);
     }
 }
 
-function housePick(house) {
+function housePick() {
+    const house = document.querySelector('#btnHouse');
     const rng = ['rock', 'paper', 'scissors', 'lizard', 'spock'][Math.floor(Math.random() * 5)];
     house.classList.add(`chip-${rng}`);
     house.setAttribute('value', rng);
     house.querySelector('img').setAttribute('src', `./images/icon-${rng}.svg`)
     return rng;
+}
+
+function updateScore(status) { // true=win false=lose
+    const score = (status) ? parseInt(getScore()) + 1 : parseInt(getScore()) - 1;
+    document.querySelector('#score').innerHTML = score; // UI score
+    localStorage.setItem('rpslsScore', score);          // localstorage
+    return score;
+}
+
+function getScore() {
+    return (localStorage.getItem('rpslsScore') == null) ? '0'
+            : localStorage.getItem('rpslsScore');
 }
