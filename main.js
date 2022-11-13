@@ -1,7 +1,7 @@
 // USING KEYFRAME
 document.addEventListener('DOMContentLoaded', () => {
 
-    //rules
+    // rules
     document.querySelector('#showRules').addEventListener('click', () => {
         document.querySelector('.rules').classList.add('show');
     });
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const picked = event.target;
         const board = event.currentTarget;
         if (!picked.classList.contains('chip')) return;
-        
+
         // clasess
         board.classList.add('game-start');  // board
         picked.classList.add('picked');     // chip
