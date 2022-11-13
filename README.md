@@ -30,8 +30,8 @@ Users should be able to:
 
 ### Links
 
-- [Live Demo]()
-- [FontendMentor Solution]()
+- [Live Demo](https://njvs.github.io/Rock-Paper-Scissors-Lizard-Spock/)
+- [FontendMentor Solution](https://www.frontendmentor.io/solutions/rock-paper-scissor-lizard-spock-OqBM3Ujnf7)
 
 ### Built with
 
