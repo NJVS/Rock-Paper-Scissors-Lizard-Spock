@@ -379,7 +379,7 @@ main.root {
   flex-direction: column;
   margin: auto;
   height: 100%;
-  background-color: hsl(214deg, 47%, 23%);
+  background: radial-gradient(ellipse at top, hsl(214deg, 47%, 23%), hsl(237deg, 49%, 15%));
   font-family: "Barlow Semi Condensed", sans-serif;
 }
 main.root button.show-rules {

@@ -14,7 +14,7 @@ main.root {
     margin: auto;
     // padding-top: 3rem;
     height: 100%;
-    background-color: hsl(214, 47%, 23%);
+    background: radial-gradient(ellipse at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
     font-family: 'Barlow Semi Condensed', sans-serif; // temp
 
     button.show-rules {
